@@ -5,9 +5,7 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    if (numbers.length === 0) {
-        return [];
-    }
+    if (numbers.length === 0) return [];
     let firstLast: number[] = [numbers[0], numbers[numbers.length - 1]];
     return firstLast;
 }
@@ -26,8 +24,8 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    let integers: number[] = numbers.map((str: string): number =>
-        parseInt(str, 10),
+    let integers: number[] = numbers.map((str) =>
+        isNaN(parseInt(str, 10)) ? 0 : parseInt(str, 10),
     );
     return integers;
 }
@@ -40,7 +38,13 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let noDollars: string[] = amounts.map((amount: string) =>
+        amount.startsWith("$") ? amount.slice(1) : amount,
+    );
+    let integers: number[] = noDollars.map((str) =>
+        isNaN(parseInt(str, 10)) ? 0 : parseInt(str, 10),
+    );
+    return integers;
 };
 
 /**
@@ -75,7 +79,17 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (colors.length === 0) return true;
+    let redFilter: string[] = colors.filter(
+        (color: string): boolean => !(color === "red"),
+    );
+    let blueFilter: string[] = redFilter.filter(
+        (color: string): boolean => !(color === "blue"),
+    );
+    let greenFilter: string[] = blueFilter.filter(
+        (color: string): boolean => !(color === "green"),
+    );
+    return greenFilter.length === 0;
 }
 
 /**
