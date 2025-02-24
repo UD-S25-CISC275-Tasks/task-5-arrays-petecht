@@ -5,9 +5,10 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    let firstLast: number[] = [];
-    firstLast[0] = numbers[0];
-    firstLast[1] = numbers[numbers.length - 1];
+    if (numbers.length === 0) {
+        return [];
+    }
+    let firstLast: number[] = [numbers[0], numbers[numbers.length - 1]];
     return firstLast;
 }
 
@@ -25,7 +26,10 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    let integers: number[] = numbers.map((str: string): number =>
+        parseInt(str, 10),
+    );
+    return integers;
 }
 
 /**
@@ -53,7 +57,10 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let shortWords: string[] = words.filter(
+        (word: string): boolean => word.length < 4,
+    );
+    return shortWords.length;
 }
 
 /**
