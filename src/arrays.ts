@@ -24,8 +24,8 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    let integers: number[] = numbers.map((str: string): number =>
-        parseInt(str, 10),
+    let integers: number[] = numbers.map((str) =>
+        isNaN(parseInt(str, 10)) ? 0 : parseInt(str, 10),
     );
     return integers;
 }
@@ -41,7 +41,9 @@ export const removeDollars = (amounts: string[]): number[] => {
     let noDollars: string[] = amounts.map((amount: string) =>
         amount.startsWith("$") ? amount.slice(1) : amount,
     );
-    let integers: number[] = noDollars.map((str: string) => parseFloat(str));
+    let integers: number[] = noDollars.map((str) =>
+        isNaN(parseInt(str, 10)) ? 0 : parseInt(str, 10),
+    );
     return integers;
 };
 
@@ -78,8 +80,16 @@ export function countShortWords(words: string[]): number {
  */
 export function allRGB(colors: string[]): boolean {
     if (colors.length === 0) return true;
-
-    return false;
+    let redFilter: string[] = colors.filter(
+        (color: string): boolean => !(color === "red"),
+    );
+    let blueFilter: string[] = redFilter.filter(
+        (color: string): boolean => !(color === "blue"),
+    );
+    let greenFilter: string[] = blueFilter.filter(
+        (color: string): boolean => !(color === "green"),
+    );
+    return greenFilter.length === 0;
 }
 
 /**
